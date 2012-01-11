@@ -14,22 +14,26 @@ Para configurar a biblioteca você precisará editar o arquivo de configuração
 
 ## Funcionalidades
 
-### Saldo da conta
+### Enviando uma mensagem
 
-Para saber qual o saldo atual da sua conta você pode usar o seguinte código:
+O SoSMS permite o envio de uma mesma mensagem para vários destinatários ao mesmo tempo. Um destinatário deve possuir um nome e um telefone (incluindo DDD).
 
-	using SharpSoSMS;
-
-	SoSMSClient.GetBalance().Value;
-
-Este código retornar um valor inteiro com o saldo atual da sua conta.
-
-### Resgatando o status de uma mensagem
+O código abaixo mostra como você pode enviar uma mensagem para vários destinatários ao mesmo tempo.
 
 	using SharpSoSMS;
 
-	int id = 1002;
-	SoSMSMessage message = SoSMSCliente.GetMessage(id);
+	SoSMSMessage message = SoSMSCliente.SendMessage("Bem Vindo!", "Maria:1187965545,Luana:8189965474,Francisco:8388496535");
+
+O primeiro parâmetro é o texto da mensagem a ser enviado. Deve conter no máximo 140 caractéres.
+
+Já o segundo parâmetro é uma String contendo os dados dos destinatários. Todo contato deve possuir um nome e um número de telefone que devem ser separados pelo caractér de dois pontos (:). Caso haja mais de um contato, devem ser separados por vírgula (,).
+Os números de telefone deverão possuir DDD e o número, totalizando 10 caracteres.
+
+No exemplo acima será enviada uma mensagem com o texto "Bem Vindo!" para três destinatários:
+
+ - Maria - (11) 8796-5545
+ - Luana - (81) 8996-5474
+ - Francisco - (83) 8879-6535
 
 Este método retorna um objeto do tipo SoSMSMessage que possui as seguintes características:
 
@@ -43,6 +47,25 @@ Cada dispach (SoSMSMessageDispach) possui as seguintes características:
 	messageDispach.Status // O status da entrega da mensagem para o destinatário
 
 Para mais informações sobre os possíveis status de retorno verifique a [documentação](http://sosms.com.br/pagina/documentacao#resposta).
+
+### Resgatando o status de uma mensagem
+
+	using SharpSoSMS;
+
+	int id = 1002;
+	SoSMSMessage message = SoSMSCliente.GetMessage(id);
+
+Este método retorna um objeto do tipo SoSMSMessage descrito acima.
+
+### Saldo da conta
+
+Para saber qual o saldo atual da sua conta você pode usar o seguinte código:
+
+	using SharpSoSMS;
+
+	SoSMSClient.GetBalance().Value;
+
+Este código retorna um valor inteiro com o saldo atual da sua conta.
 
 ## TODO
 Criar os métodos de envio de mensagens
