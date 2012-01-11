@@ -68,9 +68,7 @@ Para saber qual o saldo atual da sua conta você pode usar o seguinte código:
 Este código retorna um valor inteiro com o saldo atual da sua conta.
 
 ## TODO
-Criar os métodos de envio de mensagens
-
-Criar testes unitários para fingir o acesso aos serviços do SoSMS, usando Mock Responses.
+Documentar no README as exceções
 
 ## Documentação oficial
 Toda a documentação da API pode ser encontrada no site do [SoSMS](http://sosms.com.br/pagina/documentacao).
