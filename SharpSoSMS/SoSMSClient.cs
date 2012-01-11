@@ -37,10 +37,10 @@ namespace SharpSoSMS
         ///  Returns the message
         /// </summary>
         /// <returns>SoSMSMessage</returns>
-        public SoSMSBalance GetMessage(int id)
+        public SoSMSMessage GetMessage(int id)
         {
             string url = sosmsUri + "/messages/" + id + "?auth_token=" + configuration.AuthToken;
-            return (SoSMSBalance) SendRequest(url, typeof(SoSMSMessage));
+            return (SoSMSMessage) SendRequest(url, typeof(SoSMSMessage));
         }
 
         private Object SendRequest(string url, Type deserializerType)
