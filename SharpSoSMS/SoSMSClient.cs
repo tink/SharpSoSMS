@@ -30,23 +30,63 @@ namespace SharpSoSMS
         public SoSMSBalance GetBalance()
         {
             string url = sosmsUri + "/users/credits.xml?auth_token=" + configuration.AuthToken;
-            return (SoSMSBalance) SendRequest(url, typeof(SoSMSBalance));
+            return (SoSMSBalance) SendGetRequest(url, typeof(SoSMSBalance));
+        }
+
+        /// <summary>
+        ///  Send a message do contacts
+        /// </summary>
+        /// <param name="text">The text message. Should be 140 chars at max.</param>
+        /// <param name="contacts">
+        ///  A string representing the contacts list in the format: "FirstContact:1188888888,SecondContact:2299999999".
+        ///  The name and the phone number should be separated by ':', and contacts by ';'.
+        /// </param>
+        /// <returns>The created message</returns>
+        public SoSMSMessage SendMessage(string text, string contacts)
+        {
+            string url = sosmsUri + "/messages.xml?auth_token=" + configuration.AuthToken;
+            string parameters =  "message[text]=" + text;
+                   parameters += "&message[contacts]=" + contacts;
+            return (SoSMSMessage) SendPostRequest(url, parameters, typeof(SoSMSMessage));
         }
 
         /// <summary>
         ///  Returns the message
         /// </summary>
+        /// <param name="id">The id of message.</param>
         /// <returns>SoSMSMessage</returns>
         public SoSMSMessage GetMessage(int id)
         {
-            string url = sosmsUri + "/messages/" + id + "?auth_token=" + configuration.AuthToken;
-            return (SoSMSMessage) SendRequest(url, typeof(SoSMSMessage));
+            string url = sosmsUri + "/messages/" + id + ".xml?auth_token=" + configuration.AuthToken;
+            return (SoSMSMessage) SendGetRequest(url, typeof(SoSMSMessage));
         }
 
-        private Object SendRequest(string url, Type deserializerType)
+        private Object SendGetRequest(string url, Type deserializerType)
+        {
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+            return GetResponseAndDeserializeIt(request, deserializerType);
+        }
+
+        private Object SendPostRequest(string url, string parameters, Type deserializerType)
+        {
+            UTF8Encoding encoding = new UTF8Encoding();
+            byte[] data = encoding.GetBytes(parameters);
+
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = data.Length;
+
+            Stream newStream = request.GetRequestStream();
+            newStream.Write(data, 0, data.Length);
+            newStream.Close();
+
+            return GetResponseAndDeserializeIt(request, deserializerType);
+        }
+
+        private Object GetResponseAndDeserializeIt(HttpWebRequest request, Type deserializerType)
         {
             HttpWebResponse response = null;
-            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
             try
             {
                 response = request.GetResponse() as HttpWebResponse;

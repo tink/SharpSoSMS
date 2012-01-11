@@ -12,7 +12,7 @@ namespace Tests
         [TestMethod]
         public void ShoudDeserializeAMessageXml()
         {
-            deserializer = new SoSMSResponseDeserializer(typeof(SoSMSMessage), MockMessageResponse());
+            deserializer = new SoSMSResponseDeserializer(typeof(SoSMSMessage), XmlMockedResponses.Message());
             SoSMSMessage message = (SoSMSMessage) deserializer.Deserialize();
             
             Assert.AreEqual(1002, message.Id);
@@ -27,38 +27,11 @@ namespace Tests
         [TestMethod]
         public void ShouldReturnTheBalanceBasedOnXml()
         {
-            deserializer = new SoSMSResponseDeserializer(typeof(SoSMSBalance), MockAccountCreditsResponse());
+            deserializer = new SoSMSResponseDeserializer(typeof(SoSMSBalance), XmlMockedResponses.AccountBalance());
             SoSMSBalance balance = (SoSMSBalance) deserializer.Deserialize();
             Assert.AreEqual(106, balance.Value);
         }
 
-        protected string MockAccountCreditsResponse()
-        {
-            return @"<accountCredits>
-                       <value>106</value>
-                     </accountCredits>";
-        }
-        protected string MockMessageResponse()
-        {
-            return @"<message>
-                      <id type=""integer"">1002</id>
-                      <text>Test</text>
-                      <message-count>3</message-count>
-                      <message-dispaches>
-                        <message-dispach>
-                          <status>Processando</status>
-                          <phone-number>(00) 0000-0000</phone-number>
-                        </message-dispach>
-                        <message-dispach>
-                          <status>Processando</status>
-                          <phone-number>(99) 9999-9999</phone-number>
-                        </message-dispach>
-                        <message-dispach>
-                          <status>Processando</status>
-                          <phone-number>(88) 8888-8888</phone-number>
-                        </message-dispach>
-                      </message-dispaches>
-                    </message>";
-        }
+        
     }
 }
