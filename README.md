@@ -1,10 +1,10 @@
-# SharpSoSMS
-SharpSoSMS é uma biblioteca .NET para acessar os serviços de envio de mensagens em massa do [SoSMS](http://sosms.com.br) da [tink!](http://tink.com.br).
-O SoSMS permite que você mande mensagens SMS para vários destinatários ao mesmo tempo, permitindo você saber o status de cada mensagem enviada com detalhes.
+ï»¿# SharpSoSMS
+SharpSoSMS Ã© uma biblioteca .NET para acessar os serviÃ§os de envio de mensagens em massa do [SoSMS](http://sosms.com.br) da [tink!](http://tink.com.br).
+O SoSMS permite que vocÃª mande mensagens SMS para vÃ¡rios destinatÃ¡rios ao mesmo tempo, permitindo vocÃª saber o status de cada mensagem enviada com detalhes.
 
-## Utilização
-Para usar a biblioteca você deverá construir o projeto (build) e colocar o arquivo *SharpSoSMS.dll* no diretório bin/ da sua aplicação.
-Para configurar a biblioteca você precisrá editar o arquivo de configuração da sua aplicação (.config) adicionando sua chave secreta para o SoSMS, conforme o exemplo abaixo:
+## UtilizaÃ§Ã£o
+Para usar a biblioteca vocÃª deverÃ¡ construir o projeto (build) e colocar o arquivo *SharpSoSMS.dll* no diretÃ¡rio bin/ da sua aplicaÃ§Ã£o.
+Para configurar a biblioteca vocÃª precisarÃ¡ editar o arquivo de configuraÃ§Ã£o da sua aplicaÃ§Ã£o (.config) adicionando sua chave secreta para o SoSMS, conforme o exemplo abaixo:
 
     <appSettings>
 		<add key="SoSMS.AuthToken" value="1a2b3c"/>
@@ -14,13 +14,13 @@ Para configurar a biblioteca você precisrá editar o arquivo de configuração da s
 
 ### Saldo da conta
 
-Para saber qual o saldo atual da sua conta você pode usar o seguinte código:
+Para saber qual o saldo atual da sua conta vocÃª pode usar o seguinte cÃ³digo:
 
 	using SharpSoSMS;
 
 	SoSMSClient.GetBalance().Value;
 
-Este código retornar um valor inteiro com o saldo atual da sua conta.
+Este cÃ³digo retornar um valor inteiro com o saldo atual da sua conta.
 
 ### Resgatando o status de uma mensagem
 
@@ -29,26 +29,26 @@ Este código retornar um valor inteiro com o saldo atual da sua conta.
 	int id = 1002;
 	SoSMSMessage message = SoSMSCliente.GetMessage(id);
 
-Este método retorna um objeto do tipo SoSMSMessage que possui as seguintes características:
+Este mÃ©todo retorna um objeto do tipo SoSMSMessage que possui as seguintes caracterÃ­sticas:
 
     message.Id // O identificador da mensagem
-	message.Text // A mensagem enviada aos destinatários
-	message.Dispaches // Uma lista com os envios para cada destinatário, do tipo SoSMSMessageDispach
+	message.Text // A mensagem enviada aos destinatÃ¡rios
+	message.Dispaches // Uma lista com os envios para cada destinatÃ¡rio, do tipo SoSMSMessageDispach
 
-Cada dispach (SoSMSMessageDispach) possui as seguintes características:
+Cada dispach (SoSMSMessageDispach) possui as seguintes caracterÃ­sticas:
 
-    messageDispach.phoneNumber // O número do telefone do destinatário no formato "(99) 9999-9999"
-	messageDispach.Status // O status da entrega da mensagem para o destinatário
+    messageDispach.phoneNumber // O nÃºmero do telefone do destinatÃ¡rio no formato "(99) 9999-9999"
+	messageDispach.Status // O status da entrega da mensagem para o destinatÃ¡rio
 
-Para mais informações sobre os possíveis status de retorno verifique a [documentação](http://sosms.com.br/pagina/documentacao#resposta).
+Para mais informaÃ§Ãµes sobre os possÃ­veis status de retorno verifique a [documentaÃ§Ã£o](http://sosms.com.br/pagina/documentacao#resposta).
 
 ## TODO
-Criar os métodos de envio de mensagens
+Criar os mÃ©todos de envio de mensagens
 
-Criar testes unitários para fingir o acesso aos serviços do SoSMS, usando Mock Responses.
+Criar testes unitÃ¡rios para fingir o acesso aos serviÃ§os do SoSMS, usando Mock Responses.
 
-## Documentação oficial
-Toda a documentação da API pode ser encontrada no site do [SoSMS](http://sosms.com.br/pagina/documentacao).
+## DocumentaÃ§Ã£o oficial
+Toda a documentaÃ§Ã£o da API pode ser encontrada no site do [SoSMS](http://sosms.com.br/pagina/documentacao).
 
-## Créditos
-Parte da implementação desta biblioteca foi baseada no projeto [SharpBrake](https://github.com/asbjornu/SharpBrake) mantido por [Asbjørn Ulsberg](https://github.com/asbjornu).
+## CrÃ©ditos
+Parte da implementaÃ§Ã£o desta biblioteca foi baseada no projeto [SharpBrake](https://github.com/asbjornu/SharpBrake) mantido por [AsbjÃ¸rn Ulsberg](https://github.com/asbjornu).
