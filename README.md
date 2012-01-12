@@ -1,4 +1,3 @@
-﻿
 # SharpSoSMS
 
 SharpSoSMS é uma biblioteca .NET para acessar os serviços de envio de mensagens em massa do [SoSMS](http://sosms.com.br) da [tink!](http://tink.com.br).
@@ -8,9 +7,13 @@ O SoSMS permite que você mande mensagens SMS para vários destinatários ao mes
 Para usar a biblioteca você deverá construir o projeto (build) e colocar o arquivo *SharpSoSMS.dll* no diretário bin/ da sua aplicação.
 Para configurar a biblioteca você precisará editar o arquivo de configuração da sua aplicação (.config) adicionando sua chave secreta para o SoSMS, conforme o exemplo abaixo:
 
-    <appSettings>
+    	<appSettings>
 		<add key="SoSMS.AuthToken" value="1a2b3c"/>
 	</appSettings>
+
+Para resgatar o seu código de segurança [acesse sua conta](http://sosms.com.br/usuarios/acessar) e verifique sua chave secreta na página da [documentação](http://sosms.com.br/pagina/documentacao#chave).
+
+Para que você possa enviar suas mensagens é necessário que você confirme o número de celular informado no momento do cadastro. Para mais detalhes acesse a [documentação](http://sosms.com.br/pagina/documentacao#ativacao).
 
 ## Funcionalidades
 
