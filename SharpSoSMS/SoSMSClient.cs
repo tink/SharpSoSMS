@@ -34,7 +34,7 @@ namespace SharpSoSMS
         }
 
         /// <summary>
-        ///  Send a message do contacts
+        ///  Send a message to contacts
         /// </summary>
         /// <param name="text">The text message. Should be 140 chars at max.</param>
         /// <param name="contacts">
@@ -48,6 +48,20 @@ namespace SharpSoSMS
             string parameters =  "message[text]=" + text;
                    parameters += "&message[contacts]=" + contacts;
             return (SoSMSMessage) SendPostRequest(url, parameters, typeof(SoSMSMessage));
+        }
+
+        /// <summary>
+        ///  Send a message to each contact in the array
+        /// </summary>
+        /// <param name="text">The text message. Should be 140 chars at max.</param>
+        /// <param name="contacts">
+        ///  An array of strings representing the contacts list. Each contact should be in the format: "FirstContact:1188888888".
+        ///  The name and the phone number should be separated by ':'.
+        /// </param>
+        /// <returns>The created message</returns>
+        public SoSMSMessage SendMessage(string text, string[] contacts)
+        {
+            return SendMessage(text, String.Join(",", contacts));
         }
 
         /// <summary>

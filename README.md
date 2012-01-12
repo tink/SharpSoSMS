@@ -16,17 +16,17 @@ Para configurar a biblioteca você precisará editar o arquivo de configuração
 
 ### Enviando uma mensagem
 
-O SoSMS permite o envio de uma mesma mensagem para vários destinatários ao mesmo tempo. Um destinatário deve possuir um nome e um telefone (incluindo DDD).
+O SoSMS permite o envio de uma mesma mensagem para vários destinatários ao mesmo tempo. Existem duas formas de enviar mensagens.
 
-O código abaixo mostra como você pode enviar uma mensagem para vários destinatários ao mesmo tempo.
+A primeira é passando os contatos em um array de strings conforme o exemplo abaixo:
 
 	using SharpSoSMS;
 
-	SoSMSMessage message = SoSMSCliente.SendMessage("Bem Vindo!", "Maria:1187965545,Luana:8189965474,Francisco:8388496535");
+	string[] contacts = {"Maria:1187965545", "Luana:8189965474", "Francisco:8388496535"};
+	SoSMSMessage message = SoSMSCliente.SendMessage("Bem Vindo!", contacts);
 
-O primeiro parâmetro é o texto da mensagem a ser enviado. Deve conter no máximo 140 caractéres.
-
-Já o segundo parâmetro é uma String contendo os dados dos destinatários. Todo contato deve possuir um nome e um número de telefone que devem ser separados pelo caractér de dois pontos (:). Caso haja mais de um contato, devem ser separados por vírgula (,).
+O primeiro parâmetro é o texto da mensagem a ser enviado. Este deve conter no máximo 140 caracteres. Já o segundo parâmetro é um array de strings contendo os dados dos destinatários.
+Cada destinatário deve possuir um nome e um número de telefone que devem ser separados pelo caractere de dois pontos (:). 
 Os números de telefone deverão possuir DDD e o número, totalizando 10 caracteres.
 
 No exemplo acima será enviada uma mensagem com o texto "Bem Vindo!" para três destinatários:
@@ -47,6 +47,14 @@ Cada dispach (SoSMSMessageDispach) possui as seguintes características:
 	messageDispach.Status // O status da entrega da mensagem para o destinatário
 
 Para mais informações sobre os possíveis status de retorno verifique a [documentação](http://sosms.com.br/pagina/documentacao#resposta).
+
+O código abaixo mostra como você pode enviar uma mensagem para vários destinatários ao mesmo tempo passando a lista de destinatários como uma string única.
+
+	using SharpSoSMS;
+
+	SoSMSMessage message = SoSMSCliente.SendMessage("Bem Vindo!", "Maria:1187965545,Luana:8189965474,Francisco:8388496535");
+
+Neste, caso haja mais de um destinatário, os mesmos devem ser separados por vírgula (,).
 
 ### Resgatando o status de uma mensagem
 

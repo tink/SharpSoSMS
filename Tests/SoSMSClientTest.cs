@@ -66,6 +66,30 @@ namespace Tests
             Assert.AreEqual("(88) 8888-8888", dispach.PhoneNumber);
         }
 
+        [TestMethod]
+        [HostType("Moles")]
+        public void ShouldSendAMessageToContactsUsingAArray()
+        {
+            MockHttpResponse(XmlMockedResponses.Message(), HttpStatusCode.OK);
+
+            string[] contacts = {"Joao:0000000000","Luisa:9999999999","Mario:8888888888"};
+            SoSMSMessage message = client.SendMessage("Test", contacts);
+            Assert.IsNotNull(message.Id);
+            Assert.AreEqual("Test", message.Text);
+
+            SoSMSMessageDispach dispach = message.Dispaches[0];
+            Assert.AreEqual("Processando", dispach.Status);
+            Assert.AreEqual("(00) 0000-0000", dispach.PhoneNumber);
+
+            dispach = message.Dispaches[1];
+            Assert.AreEqual("Processando", dispach.Status);
+            Assert.AreEqual("(99) 9999-9999", dispach.PhoneNumber);
+
+            dispach = message.Dispaches[2];
+            Assert.AreEqual("Processando", dispach.Status);
+            Assert.AreEqual("(88) 8888-8888", dispach.PhoneNumber);
+        }
+
         private void MockHttpResponse(string responseBody, HttpStatusCode statusCode)
         {
             var mockedWebResponse = new MHttpWebResponse();
