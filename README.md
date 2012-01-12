@@ -7,7 +7,7 @@ O SoSMS permite que você mande mensagens SMS para vários destinatários ao mes
 Para usar a biblioteca você deverá construir o projeto (build) e colocar o arquivo *SharpSoSMS.dll* no diretário bin/ da sua aplicação.
 Para configurar a biblioteca você precisará editar o arquivo de configuração da sua aplicação (.config) adicionando sua chave secreta para o SoSMS, conforme o exemplo abaixo:
 
-    	<appSettings>
+        <appSettings>
 		<add key="SoSMS.AuthToken" value="1a2b3c"/>
 	</appSettings>
 
