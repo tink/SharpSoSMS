@@ -26,7 +26,7 @@ A primeira é passando os contatos em um array de strings conforme o exemplo aba
 	using SharpSoSMS;
 
 	string[] contacts = {"Maria:1187965545", "Luana:8189965474", "Francisco:8388496535"};
-	SoSMSMessage message = SoSMSCliente.SendMessage("Bem Vindo!", contacts);
+	SoSMSMessage message = SoSMSClient.SendMessage("Bem Vindo!", contacts);
 
 O primeiro parâmetro é o texto da mensagem a ser enviado. Este deve conter no máximo 140 caracteres. Já o segundo parâmetro é um array de strings contendo os dados dos destinatários.
 Cada destinatário deve possuir um nome e um número de telefone que devem ser separados pelo caractere de dois pontos (:). 
@@ -55,7 +55,7 @@ O código abaixo mostra como você pode enviar uma mensagem para vários destina
 
 	using SharpSoSMS;
 
-	SoSMSMessage message = SoSMSCliente.SendMessage("Bem Vindo!", "Maria:1187965545,Luana:8189965474,Francisco:8388496535");
+	SoSMSMessage message = SoSMSClient.SendMessage("Bem Vindo!", "Maria:1187965545,Luana:8189965474,Francisco:8388496535");
 
 Neste, caso haja mais de um destinatário, os mesmos devem ser separados por vírgula (,).
 
@@ -64,7 +64,7 @@ Neste, caso haja mais de um destinatário, os mesmos devem ser separados por ví
 	using SharpSoSMS;
 
 	int id = 1002;
-	SoSMSMessage message = SoSMSCliente.GetMessage(id);
+	SoSMSMessage message = SoSMSClient.GetMessage(id);
 
 Este método retorna um objeto do tipo SoSMSMessage descrito acima.
 
